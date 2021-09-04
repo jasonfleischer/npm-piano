@@ -1,7 +1,7 @@
 
-function pianoView(options) {
+function simplePiano(options) {
 
-	let pianoViews = document.querySelectorAll('.pianoView')
+	let pianoViews = document.querySelectorAll('.simple-piano')
 
 	if (options.range === 'undefined'){
 
@@ -11,4 +11,4 @@ function pianoView(options) {
 		pianoView.style.backgroundColor = "red";
 	}) 
 }
-module.exports.pianoView = pianoView;
+module.exports.simplePiano = simplePiano;
