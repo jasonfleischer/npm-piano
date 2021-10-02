@@ -22,8 +22,8 @@ musicKit.init();
 const pianoView = pianoKit.build({
 	id: 'your_piano_id',
 	range: {
-		min: 60, // midi value = C3
-		max: 72  // midi value = C4
+		min: 60, // midi value = C4 = middle C
+		max: 72  // midi value = C5
 	},
 	width: 325,
 	onClick: function(note, isOn) {
@@ -42,18 +42,18 @@ let note = musicKit.all_notes[midiValue];
 pianoView.drawNote(note);
 
 // draw a chord
-let midiValue = 60 // C4
+let midiValue = 60 // C4 = middle C
 let note = musicKit.all_notes[midiValue];
 let chord = new musicKit.Chord(note, musicKit.Chord.TYPE.minor);
 pianoView.drawChord(chord);
 
 // draw a scale
-let midiValue = 62 // D
+let midiValue = 62 // D4
 let note = musicKit.all_notes[midiValue];
 let scale = new musicKit.Scale(note, musicKit.Scale.TYPE.Aeolian); // Dm scale
 pianoView.drawScale(scale);
 
-// clear drawings
+// clear all drawings
 pianoView.clear();
 
 // add a midi listener
@@ -68,3 +68,5 @@ new musicKit.MidiListener(
 	});
 
 ```
+
+Click [here](https://jasonfleischer.github.io/npm-piano-demo/screenshot/notes.jpg) for midi note references 
