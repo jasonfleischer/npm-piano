@@ -1,6 +1,6 @@
 {
   "name": "@jasonfleischer/piano",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "under construction",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,8 @@
   "keywords": [
     "piano",
     "keyboard",
+    "synth",
+    "midi",
     "simple"
   ],
   "author": {

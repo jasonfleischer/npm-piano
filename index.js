@@ -1,85 +1,51 @@
-const musicKit = require("@jasonfleischer/music-model-kit");
-const piano_view = require("./lib/piano_view.js");
+const PianoView = require("./lib/piano_view.js");
+const log = require("@jasonfleischer/log");
 
+function pianoBuilder(options) {
 
-const piano = {
-
-};
-
-piano.init = function(options) {
-
-	let pianoViews = document.querySelectorAll('.piano')
-
-	if (options.range === undefined){
-
+	this.id = options.id;
+	if (this.id === undefined){
+		log.e('id not provided for piano')
+		return
 	}
 
-	if (options.interactive === undefined){
-
+	this.pianoView = document.getElementById(this.id);
+	if (this.pianoView === undefined){
+		log.e('not piano exists with id: ' + this.id)
+		return
 	}
 
-	if (options.width === undefined){
-		options.width = 1000
+	function isInt(value) {
+		var x = parseFloat(value);
+		return !isNaN(value) && (x | 0) === x;
+	}
+	this.range = options.range;
+	if (this.range === undefined){
+		this.range = { min: 21, max: 108 }
+	} else {
+		if (options.range.min !== undefined && options.range.max !== undefined) {
+			if(isInt(options.range.min)){
+				this.range.min = Math.min(Math.max(this.range.min, options.range.min), this.range.max);
+			}
+			if(isInt(options.range.max)){
+				this.range.max = Math.min(Math.max(this.range.min, options.range.max), this.range.max);
+			}
+		}
 	}
 
+	this.width = 1000;
+	if (options.width !== undefined){
+		this.width = options.width;
+	}
+	this.hover = false;
+	if (options.hover !== undefined){
+		this.hover = options.hover;
+	}
 
-	pianoViews.forEach( pianoView => {
-
-		let height = "230px"
-
-		var canvas = document.createElement('canvas'); 
-        canvas.id = "piano_background_canvas";
-        canvas.style.position = "absolute"
-        canvas.style.left = "0px"
-        canvas.style.right = "0px"
-        canvas.style.width = options.width + "px";
-		canvas.style.height = height;
-        pianoView.appendChild(canvas);
-
-        var canvas = document.createElement('canvas'); 
-        canvas.id = "piano_white_keys_canvas";
-        canvas.style.position = "absolute"
-        canvas.style.left = "0px"
-        canvas.style.right = "0px"
-        canvas.style.width = options.width + "px";
-		canvas.style.height = height;
-        pianoView.appendChild(canvas);
-
-        var canvas = document.createElement('canvas'); 
-        canvas.id = "piano_black_keys_canvas";
-        canvas.style.position = "absolute"
-        canvas.style.left = "0px"
-        canvas.style.right = "0px"
-        canvas.style.width = options.width + "px";
-		canvas.style.height = height;
-        pianoView.appendChild(canvas);
-
-
-		//pianoView.style.backgroundColor = "grey";
-		pianoView.id = "piano"
-		pianoView.style.position = "relative"
-		pianoView.style.width = options.width + "px";
-		pianoView.style.height = height;
-
-		musicKit.init();
-		//build_all_notes();
-		piano_view.init();
-
-		piano_view.resize(options.width)
-	}) 
+	this.view = new PianoView(this.id, this.width, this.range, options.onClick, this.hover);
+	return this.view;
 }
 
-piano.drawNote = function(midiValue) {
-	piano_view.drawNote(musicKit.all_notes[midiValue]);
-}
 
-piano.drawChord = function(midiValue) {
-	piano_view.drawChord(new musicKit.Chord.Chord(musicKit.all_notes[midiValue], musicKit.all_notes));
-}
-
-piano.clear = function(midiValue) {
-	piano_view.clearCanvases();
-}
-
-module.exports = piano;
+module.exports = pianoBuilder;
 
