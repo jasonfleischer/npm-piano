@@ -28,10 +28,8 @@ const pianoView = pianoKit({
 	width: 325,
 	onClick: function(note, isOn) {
 		if(isOn) {
-			log.e("???")
 			pianoView.drawNote(note);
 		} else {
-			log.e("??")
 			pianoView.clearNote(note);
 		}
 	},
