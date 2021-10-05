@@ -1,6 +1,6 @@
 ## [@jasonfleischer/piano](https://www.npmjs.com/package/@jasonfleischer/piano)
 
-A package for displaying notes, chords and scales on a keyboard. Click [HERE](https://jasonfleischer.github.io/npm-piano-demo/) to see a demo
+A package for displaying notes, chords and scales on a keyboard view. Click [HERE](https://jasonfleischer.github.io/npm-piano-demo/) to see a demo
 
 ![Screenshot](https://jasonfleischer.github.io/npm-piano-demo/screenshot/screen.png "Screenshot")
 
@@ -15,11 +15,11 @@ $ npm i @jasonfleischer/piano
 ```
 
 ``` javascript
-const pianoKit = require("@jasonfleischer/piano")
+const pianoKit = require("@jasonfleischer/piano");
 const musicKit = require("@jasonfleischer/music-model-kit");
 musicKit.init();
 
-const pianoView = pianoKit.build({
+const pianoView = pianoKit({
 	id: 'your_piano_id',
 	range: {
 		min: 60, // midi value = C4 = middle C
@@ -28,8 +28,10 @@ const pianoView = pianoKit.build({
 	width: 325,
 	onClick: function(note, isOn) {
 		if(isOn) {
+			log.e("???")
 			pianoView.drawNote(note);
 		} else {
+			log.e("??")
 			pianoView.clearNote(note);
 		}
 	},
