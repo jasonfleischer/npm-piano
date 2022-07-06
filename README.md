@@ -76,3 +76,4 @@ Click [here](https://jasonfleischer.github.io/npm-piano-demo/screenshot/notes.jp
 - [Demo](https://jasonfleischer.github.io/npm-piano-demo/)
 - [Ear Trainer](https://jasonfleischer.github.io/eartrainer/)
 - [Synth](https://jasonfleischer.github.io/synth/)
+- [Just Intonation](https://jasonfleischer.github.io/just-intonation/)
